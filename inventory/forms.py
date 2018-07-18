@@ -6,7 +6,7 @@ class InventoryQueryForm(forms.Form):
     barcode_number = forms.CharField(label='Codigo de Barras',
                                      max_length=155,
                                      required=False)
-    piece_number = forms.CharField(label='Número de Pieza',
+    piece_number = forms.CharField(label='Número de Parte',
                                    max_length=155,
                                    required=False)
 
@@ -29,7 +29,7 @@ class EntryForm(forms.Form):
                                      max_length=155,
                                      required=False)
 
-    piece_number = forms.CharField(label='Número de Pieza',
+    piece_number = forms.CharField(label='Número de Parte',
                                    max_length=155,
                                    required=False)
 
@@ -106,18 +106,18 @@ class WithdrawalForm(forms.Form):
         if not(piece_number or barcode_number):
             raise forms.ValidationError(
                     'Se tiene que rellenar el código de barras o el '
-                    'número de pieza'
+                    'número de parte'
                 )
         elif piece_number:
             if not Item.objects.filter(piece_number=piece_number).exists():
                 raise forms.ValidationError(
-                    'La pieza no existe, por favor dela de alta'
+                    'La parte no existe, por favor dela de alta'
                 )
             item = Item.objects.get(piece_number=piece_number)
         else:
             if not Item.objects.filter(barcode_number=barcode_number).exists():
                 raise forms.ValidationError(
-                    'La pieza no existe, por favor dela de alta'
+                    'La parte no existe, por favor dela de alta'
                 )
             item = Item.objects.get(barcode_number=barcode_number)
 

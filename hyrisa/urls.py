@@ -10,6 +10,7 @@ from django.contrib import admin
 urlpatterns = [
     url('', include('base.urls')),
     url('', include('social_django.urls', namespace='social')),
+    url('accounts/', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^inventory/', include('inventory.urls')),
     url(r'^tosp_auth/', include('tosp_auth.urls'))

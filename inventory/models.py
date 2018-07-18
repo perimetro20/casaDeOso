@@ -9,7 +9,7 @@ class Item(models.Model):
                              blank=True)
     piece_number = models.CharField(max_length=155,
                                     unique=True,
-                                    verbose_name='Número de Pieza')
+                                    verbose_name='Número de Parte')
     barcode_number = models.CharField(max_length=155,
                                       default='',
                                       unique=True,

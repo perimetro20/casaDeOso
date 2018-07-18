@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import InventoryQueryForm, ItemForm, EntryForm, WithdrawalForm
 from .models import Entry, Item, Withdrawal
 
 
+@login_required
 def query_inventory(request):
     if request.method == "GET":
         form = InventoryQueryForm
@@ -27,6 +29,7 @@ def query_inventory(request):
             return HttpResponseBadRequest
 
 
+@login_required
 def item(request, piece_number):
     item = get_object_or_404(Item,
                              piece_number=piece_number)
@@ -36,6 +39,7 @@ def item(request, piece_number):
     return render(request, 'inventory/item.html', context)
 
 
+@login_required
 def new_item(request):
     if request.method == 'GET':
         form = ItemForm
@@ -60,6 +64,7 @@ def new_item(request):
             return render(request, 'inventory/form.html', context)
 
 
+@login_required
 def new_entry(request):
     if request.method == 'GET':
         form = EntryForm
@@ -84,6 +89,7 @@ def new_entry(request):
             return render(request, 'inventory/form.html', context)
 
 
+@login_required
 def new_withdrawal(request):
     if request.method == 'GET':
         form = WithdrawalForm
@@ -108,6 +114,7 @@ def new_withdrawal(request):
             return render(request, 'inventory/form.html', context)
 
 
+@login_required
 def entries(request):
     all_entries = Entry.objects.all()
     context = {
@@ -117,6 +124,7 @@ def entries(request):
     return render(request, 'inventory/history.html', context)
 
 
+@login_required
 def withdrawals(request):
     all_withdrawals = Withdrawal.objects.all()
     context = {
