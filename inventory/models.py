@@ -4,6 +4,9 @@ from django.db import models
 class Item(models.Model):
     name = models.CharField(max_length=155,
                             verbose_name='Nombre')
+    brand = models.CharField(max_length=155,
+                             verbose_name='Marca',
+                             blank=True)
     piece_number = models.CharField(max_length=155,
                                     unique=True,
                                     verbose_name='Número de Pieza')
