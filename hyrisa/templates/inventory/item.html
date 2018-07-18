@@ -1,0 +1,24 @@
+{% extends "layouts/basic.html" %}
+{% load staticfiles %}
+{% block page_title %}Información Pieza{% endblock %}
+{% block extra_css %} 
+{% endblock %}
+
+{% block body_content %}
+<div class='row'>
+    <h1>Información Pieza</h1>
+</div>
+<div class='row'>
+    Nombre: {{ item.name }}<br>
+    Número de Referencia: {{ item.reference_number }}<br>
+    Descripción: {{ item.description }}<br>
+    Costo: {{ item.cost }}<br>
+    Cantidad: {{ item.quantity }}<br>
+</div>
+
+<div class='row text-center'>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}

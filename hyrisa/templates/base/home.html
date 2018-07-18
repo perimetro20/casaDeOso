@@ -1,0 +1,31 @@
+{% extends "layouts/basic.html" %}
+{% load staticfiles %}
+{% block page_title %}Awesome Page{% endblock %}
+{% block extra_css %} 
+	{# <link rel="stylesheet" type="text/css" href={% static "css/base/home.css" %}> #}
+{% endblock %}
+
+
+{% block body_content %}
+<div class='row'>
+    <h1 class='text-center'>Bienvenido al Inventario de Hyrisa</h1>
+</div>
+<div class='row'>
+    <h2>Consulta lo que necesites<h2>
+</div>
+<div class='row text-center'>
+	<a href="{% url 'inventory:query_inventory' %}" class="btn btn-lg btn-primary">Consultar Inventario</a>
+    <a href="{% url 'inventory:new_item' %}" class="btn btn-lg btn-warning">Cargar Nueva Pieza</a>
+	<a href="{% url 'inventory:new_entry' %}" class="btn btn-lg btn-success">Ingresar Mercancía</a>
+	<a href="{% url 'inventory:new_withdrawal' %}" class="btn btn-lg btn-danger">Retirar Mercancía</a>
+	<a href="{% url 'inventory:entries' %}" class="btn btn-lg btn-info">Historial de Ingresos</a>
+    <a href="{% url 'inventory:withdrawals' %}" class="btn btn-lg btn-info">Historial de Retiros</a>
+</div>
+<div class='row text-center'>
+    <img src={% static "images/logo.png" class='img-responsive'%}>
+</div>
+
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}
