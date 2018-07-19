@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from .views import item, query_inventory, new_entry, new_item, new_withdrawal, \
-                   entries, withdrawals
+                   entries, withdrawals, statistics
 
 
 app_name = 'inventory'
@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^new_withdrawal/', new_withdrawal, name='new_withdrawal'),
     url(r'^entries/', entries, name='entries'),
     url(r'^withdrawals/', withdrawals, name='withdrawals'),
+    url(r'^statistics/', statistics, name='statistics'),
 ]

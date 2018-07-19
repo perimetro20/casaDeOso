@@ -132,3 +132,15 @@ def withdrawals(request):
         'items': all_withdrawals
     }
     return render(request, 'inventory/history.html', context)
+
+@login_required
+def statistics(request):
+    total = 0
+    parts = Item.objects.all()
+    for part in parts:
+        total += part.cost * part.quantity
+    context = {
+        'total_cost': total
+    }
+
+    return render(request, 'inventory/statistics.html', context)
