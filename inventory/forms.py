@@ -84,11 +84,11 @@ class WithdrawalForm(forms.Form):
                                      max_length=155,
                                      required=False)
 
-    piece_number = forms.CharField(label='Número de Pieza',
+    piece_number = forms.CharField(label='Número de Parte',
                                    max_length=155,
                                    required=False)
 
-    quantity = forms.IntegerField(label='Número de piezas',
+    quantity = forms.IntegerField(label='Número de Piezas',
                                   required=True)
 
     service_order = forms.CharField(label='Número de Orden de Servicio',
