@@ -20,7 +20,8 @@ class ItemForm(forms.ModelForm):
                   'barcode_number',
                   'description',
                   'cost',
-                  'quantity']
+                  'quantity',
+                  'unit']
 
 
 class EntryForm(forms.Form):

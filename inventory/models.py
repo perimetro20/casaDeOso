@@ -21,6 +21,8 @@ class Item(models.Model):
                                verbose_name='Costo')
     quantity = models.IntegerField(default=0,
                                    verbose_name='Cantidad')
+    unit = models.CharField(max_length=155,
+                            verbose_name='Unidad')
 
     def __str__(self):
         return self.piece_number
