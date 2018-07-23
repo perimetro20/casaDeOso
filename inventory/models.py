@@ -22,7 +22,6 @@ class Item(models.Model):
                                     verbose_name='Número de Parte')
     barcode_number = models.CharField(max_length=155,
                                       default='',
-                                      unique=True,
                                       blank=True,
                                       verbose_name='Código de barras')
     description = models.TextField(verbose_name='Descripción')
