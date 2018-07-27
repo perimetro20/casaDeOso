@@ -3,11 +3,13 @@ from django.db import models
 
 class Item(models.Model):
     GASOLINA = 'gasolina'
-    PRODUCTO_TERMINADO = 'producto_terminado'
+    PRODUCTO_TERMINADO_BODEGA_UNO = 'producto_terminado_bodega_uno'
+    PRODUCTO_TERMINADO_BODEGA_DOS = 'producto_terminado_bodega_dos'
     ACCESORIOS = 'accesorios'
     REFACCIONES = 'refacciones'
     AREA_OPTIONS = ((GASOLINA, 'Gasolina'),
-                       (PRODUCTO_TERMINADO, 'Producto Terminado'),
+                       (PRODUCTO_TERMINADO_BODEGA_UNO, 'Producto Terminado Bodega 1'),
+                       (PRODUCTO_TERMINADO_BODEGA_DOS, 'Producto Terminado Bodega 2'),
                        (ACCESORIOS, 'Accesorios'),
                        (REFACCIONES, 'Refacciones'))
 
@@ -39,8 +41,10 @@ class Item(models.Model):
     def verbose_area_name(self):
         if self.area == self.GASOLINA:
             return 'Gasolina'
-        elif self.area == self.PRODUCTO_TERMINADO:
-            return 'Producto Terminado'
+        elif self.area == self.PRODUCTO_TERMINADO_BODEGA_UNO:
+            return 'Producto Terminado Bodega 1'
+        elif self.area == self.PRODUCTO_TERMINADO_BODEGA_DOS:
+            return 'Producto Terminado Bodega 2'
         elif self.area == self.ACCESORIOS:
             return 'Accesorios'
         elif self.area == self.REFACCIONES:
