@@ -40,6 +40,31 @@ def item(request, piece_number):
 
 
 @login_required
+def edit_item(request, piece_number):
+    item = get_object_or_404(Item,
+                                 piece_number=piece_number)
+    if request.method == 'GET':
+        form = ItemForm(instance=item)
+        context = {
+            'title': 'Editar Pieza',
+            'action': 'Editar Pieza',
+            'form': form
+        }
+        return render(request, 'inventory/form.html', context)
+    elif request.method == 'POST':
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            item = form.save()
+            return redirect('inventory:item', piece_number=item.piece_number)
+        else:
+            context = {
+            'title': 'Editar Pieza',
+            'action': 'Editar Pieza',
+            'form': form
+            }
+        return render(request, 'inventory/form.html', context)
+
+@login_required
 def new_item(request):
     if request.method == 'GET':
         form = ItemForm
@@ -132,6 +157,7 @@ def withdrawals(request):
         'items': all_withdrawals
     }
     return render(request, 'inventory/history.html', context)
+
 
 @login_required
 def statistics(request):

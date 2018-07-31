@@ -8,10 +8,10 @@ class Item(models.Model):
     ACCESORIOS = 'accesorios'
     REFACCIONES = 'refacciones'
     AREA_OPTIONS = ((GASOLINA, 'Gasolina'),
-                       (PRODUCTO_TERMINADO_BODEGA_UNO, 'Producto Terminado Bodega 1'),
-                       (PRODUCTO_TERMINADO_BODEGA_DOS, 'Producto Terminado Bodega 2'),
-                       (ACCESORIOS, 'Accesorios'),
-                       (REFACCIONES, 'Refacciones'))
+                    (PRODUCTO_TERMINADO_BODEGA_UNO, 'Producto Terminado Bodega 1'),
+                    (PRODUCTO_TERMINADO_BODEGA_DOS, 'Producto Terminado Bodega 2'),
+                    (ACCESORIOS, 'Accesorios'),
+                    (REFACCIONES, 'Refacciones'))
 
     name = models.CharField(max_length=155,
                             verbose_name='Nombre')
@@ -49,6 +49,7 @@ class Item(models.Model):
             return 'Accesorios'
         elif self.area == self.REFACCIONES:
             return 'Refacciones'
+
 
 class Entry(models.Model):
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
