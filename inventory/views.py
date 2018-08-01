@@ -175,7 +175,7 @@ def statistics(request):
     }
 
     for part in parts:
-        total += part.cost * part.quantity
+        total = part.cost * part.quantity
         context['total_cost'] += total
         context[part.area] += total
 
