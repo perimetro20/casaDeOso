@@ -42,7 +42,7 @@ def item(request, piece_number):
 @login_required
 def edit_item(request, piece_number):
     item = get_object_or_404(Item,
-                                 piece_number=piece_number)
+                             piece_number=piece_number)
     if request.method == 'GET':
         form = ItemForm(instance=item)
         context = {
@@ -58,11 +58,12 @@ def edit_item(request, piece_number):
             return redirect('inventory:item', piece_number=item.piece_number)
         else:
             context = {
-            'title': 'Editar Pieza',
-            'action': 'Editar Pieza',
-            'form': form
+                'title': 'Editar Pieza',
+                'action': 'Editar Pieza',
+                'form': form
             }
         return render(request, 'inventory/form.html', context)
+
 
 @login_required
 def new_item(request):
@@ -163,10 +164,21 @@ def withdrawals(request):
 def statistics(request):
     total = 0
     parts = Item.objects.all()
+
+    context = {
+        'total_cost': 0,
+        str(Item.GASOLINA): 0,
+        str(Item.PRODUCTO_TERMINADO_BODEGA_UNO): 0,
+        str(Item.PRODUCTO_TERMINADO_BODEGA_DOS): 0,
+        str(Item.ACCESORIOS): 0,
+        str(Item.REFACCIONES): 0
+    }
+
     for part in parts:
         total += part.cost * part.quantity
-    context = {
-        'total_cost': total
-    }
+        context['total_cost'] += total
+        context[part.area] += total
+
+    context = {key: '{:,}'.format(value) for key, value in context.items()}
 
     return render(request, 'inventory/statistics.html', context)

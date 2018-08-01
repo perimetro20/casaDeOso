@@ -5,11 +5,34 @@
 {% endblock %}
 
 {% block body_content %}
-<div class='row'>
-    <h1>Total de Inventario</h1>  
+<div>
+    <h1>Total Inventario</h1>
+    <h2>${{ total_cost }}</h2>
 </div>
-<div class='row'>
-    <h1>${{ total_cost }}</h1>
+<br>
+<div>
+    <h1>Gasolina</h1>
+    <h2>${{ gasolina }}</h2>
+</div>
+<br>
+<div>
+    <h1>Producto Terminado Bodega 1</h1>
+    <h2>${{ producto_terminado_bodega_uno }}</h2>
+</div>
+<br>
+<div>
+    <h1>Producto Terminado Bodega 2</h1>
+    <h2>${{ producto_terminado_bodega_dos }}</h2>
+</div>
+<br>
+<div>
+    <h1>Accesorios</h1>
+    <h2>${{ accesorios }}</h2>
+</div>
+<br>
+<div>
+    <h1>Refacciones</h1>
+    <h2>${{ refacciones }}</h2>
 </div>
 
 {% endblock %}
