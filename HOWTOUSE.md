@@ -1,4 +1,4 @@
-# hyrisa
+# casa_de_oso
 How to use the template
 
 ## System Requirements
@@ -45,7 +45,7 @@ $ virtualenv --python='PATH TO PYTHON 3.6' /path/to/your/venv/NAME_OF_YOUR_ENV
 We use environment variables to separate sensitive information and keys from the code, you should set the following ones.
 
 ```bash
-DJANGO_SETTINGS_MODULE='hyrisa.settings.development' // The last part depends on the environment you are on
+DJANGO_SETTINGS_MODULE='casa_de_oso.settings.development' // The last part depends on the environment you are on
 SECRET_KEY='Generate one here. (http://www.miniwebtool.com/django-secret-key-generator/)'
 DB_NAME='project_name_db' // From Database Setup
 DB_USER='project_user_admin'

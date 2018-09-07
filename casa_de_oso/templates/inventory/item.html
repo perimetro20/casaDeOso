@@ -1,0 +1,29 @@
+{% extends "layouts/basic.html" %}
+{% load staticfiles %}
+{% block page_title %}Información Pieza{% endblock %}
+{% block extra_css %} 
+{% endblock %}
+
+{% block body_content %}
+<div class='row'>
+    <h1>Información Pieza</h1>
+</div>
+<div class='row'>
+    Nombre: {{ item.name }}<br>
+    Marca: {{ item.brand }}<br>
+    Área: {{ item.verbose_area_name }}<br>
+    Número de Parte: {{ item.piece_number }}<br>
+    Código de Barras: {{ item.barcode_number }}<br>
+    Descripción: {{ item.description }}<br>
+    Costo: {{ item.cost }}<br>
+    Cantidad: {{ item.quantity }}<br>
+    Unidad: {{ item.unit }}<br>
+</div>
+
+<div class='row'>
+    <a href="{% url 'inventory:edit_item' item.piece_number %}" class="btn btn-lg btn-warning">Editar Pieza</a>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}
