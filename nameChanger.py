@@ -7,14 +7,14 @@ import sys
 
 filesToEdit = ['HOWTOUSE.md',
                'manage.py',
-               'hyrisa/urls.py',
-               'hyrisa/wsgi.py',
-               'hyrisa/settings/base.py']
+               'casa_de_oso/urls.py',
+               'casa_de_oso/wsgi.py',
+               'casa_de_oso/settings/base.py']
 
 with fileinput.FileInput(filesToEdit, inplace=True) as file:
     for line in file:
-        print(line.replace('hyrisa', sys.argv[1]), end='')
+        print(line.replace('casa_de_oso', sys.argv[1]), end='')
 
 
 # Change the name of the main project folder
-os.rename('hyrisa', sys.argv[1])
+os.rename('casa_de_oso', sys.argv[1])
