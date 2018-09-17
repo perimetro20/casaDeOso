@@ -1,18 +1,21 @@
+from django.urls import path
 from django.conf.urls import url
 from .views import item, query_inventory, new_entry, new_item, new_withdrawal, \
-                   entries, withdrawals, statistics, edit_item
+                   entries, sku, new_sku, edit_sku, withdrawals, edit_item
 
 
 app_name = 'inventory'
 
 urlpatterns = [
     url(r'^query_inventory/', query_inventory, name='query_inventory'),
+    path('sku/<int:sku_id>/', sku, name='sku'),
+    path('sku/new', new_sku, name='new_sku'),
+    path('sku/<int:sku_id>/edit/', edit_sku, name='edit_sku'),
     url(r'^item/(?P<piece_number>[-\w /,]+)', item, name='item'),
-    url(r'^edit_item/(?P<piece_number>[-\w /,]+)', edit_item, name='edit_item'),
+    path('edit_item/<int:id>/)', edit_item, name='edit_item'),
     url(r'^new_item', new_item, name='new_item'),
     url(r'^new_entry/', new_entry, name='new_entry'),
     url(r'^new_withdrawal/', new_withdrawal, name='new_withdrawal'),
     url(r'^entries/', entries, name='entries'),
-    url(r'^withdrawals/', withdrawals, name='withdrawals'),
-    url(r'^statistics/', statistics, name='statistics'),
+    url(r'^withdrawals/', withdrawals, name='withdrawals')
 ]

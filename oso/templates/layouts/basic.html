@@ -34,22 +34,7 @@
 								<a class="nav-link" href="{% url 'inventory:query_inventory' %}">Consultar Inventario</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{% url 'inventory:new_item' %}">Cargar Nueva Pieza</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'inventory:new_entry' %}">Ingresar Mercancía</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'inventory:new_withdrawal' %}">Retirar Mercancía</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'inventory:entries' %}">Historial Ingresos</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'inventory:withdrawals' %}">Historial Retiros</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'inventory:statistics' %}">Estadísticas</a>
+								<a class="nav-link" href="{% url 'inventory:new_sku' %}">Cargar Nuevo SKU</a>
 							</li>
 						{% else %}
 							<li class="nav-item">

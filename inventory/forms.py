@@ -1,28 +1,36 @@
 from django import forms
-from .models import Entry, Item, Withdrawal
+from .models import Entry, Item, SKU, Withdrawal
 
 
 class InventoryQueryForm(forms.Form):
-    barcode_number = forms.CharField(label='Codigo de Barras',
-                                     max_length=155,
-                                     required=False)
-    piece_number = forms.CharField(label='Número de Parte',
-                                   max_length=155,
-                                   required=False)
+    sku = forms.CharField(label='SKU',
+                          max_length=155)
+
+
+class SKUForm(forms.ModelForm):
+    class Meta:
+        model = SKU
+        fields = [
+            'sku',
+            'name',
+            'brand',
+            'description',
+            'part_number',
+            'measuring_unit'
+        ]
 
 
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['name',
-                  'brand',
-                  'area',
-                  'piece_number',
-                  'barcode_number',
-                  'description',
-                  'cost',
-                  'quantity',
-                  'unit']
+        fields = [
+            'sku',
+            'number',
+            'serial_number',
+            'location',
+            'individual_details',
+            'appraisal'
+        ]
 
 
 class EntryForm(forms.Form):

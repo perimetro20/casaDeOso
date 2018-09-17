@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import InventoryQueryForm, ItemForm, EntryForm, WithdrawalForm
-from .models import Entry, Item, Withdrawal
+from .forms import InventoryQueryForm, SKUForm, ItemForm, EntryForm, WithdrawalForm
+from .models import Entry, SKU, Item, Withdrawal
 
 
 @login_required
@@ -16,18 +16,73 @@ def query_inventory(request):
     elif request.method == "POST":
         form = InventoryQueryForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data['piece_number']:
-                pn = form.cleaned_data['piece_number']
-            elif form.cleaned_data['barcode_number']:
-                barcode_number = form.cleaned_data['barcode_number']
-                pn = get_object_or_404(Item, barcode_number=barcode_number).piece_number
-            else:
-                pn = 0
-            return redirect('inventory:item',
-                            piece_number=pn)
+            sku = form.cleaned_data['sku']
+            id = get_object_or_404(SKU, sku=sku).id
+            return redirect('inventory:sku',
+                            sku_id=id)
         else:
             return HttpResponseBadRequest
 
+
+@login_required
+def sku(request, sku_id):
+    sku = get_object_or_404(SKU, pk=sku_id)
+    items = Item.objects.filter(sku=sku)
+    context = {
+        'sku': sku,
+        'items': items
+    }
+
+    return render(request, 'inventory/sku.html', context)
+
+@login_required
+def new_sku(request):
+    if request.method == 'GET':
+        form = SKUForm
+        context = {
+            'title': 'Dar SKU de Alta',
+            'action': 'Crear SKU',
+            'form': form
+        }
+        return render(request, 'inventory/form.html', context)
+    elif request.method == 'POST':
+        form = SKUForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory:new_sku')
+        else:
+            context = {
+                'title': 'Dar SKU de Alta',
+                'action': 'Crear SKU',
+                'form': form
+            }
+
+            return render(request, 'inventory/form.html', context)
+
+@login_required
+def edit_sku(request, sku_id):
+    sku = get_object_or_404(SKU,
+                            pk=sku_id)
+    if request.method == 'GET':
+        form = SKUForm(instance=sku)
+        context = {
+            'title': 'Editar SKU',
+            'action': 'Editar SKU',
+            'form': form
+        }
+        return render(request, 'inventory/form.html', context)
+    elif request.method == 'POST':
+        form = SKUForm(request.POST, instance=sku)
+        if form.is_valid():
+            sku = form.save()
+            return redirect('inventory:sku', sku_id=sku.id)
+        else:
+            context = {
+                'title': 'Editar SKU',
+                'action': 'Editar SKU',
+                'form': form
+            }
+        return render(request, 'inventory/form.html', context)
 
 @login_required
 def item(request, piece_number):
@@ -40,9 +95,9 @@ def item(request, piece_number):
 
 
 @login_required
-def edit_item(request, piece_number):
+def edit_item(request, id):
     item = get_object_or_404(Item,
-                             piece_number=piece_number)
+                             id=id)
     if request.method == 'GET':
         form = ItemForm(instance=item)
         context = {
@@ -55,7 +110,7 @@ def edit_item(request, piece_number):
         form = ItemForm(request.POST, instance=item)
         if form.is_valid():
             item = form.save()
-            return redirect('inventory:item', piece_number=item.piece_number)
+            return redirect('inventory:item', id=item.id)
         else:
             context = {
                 'title': 'Editar Pieza',
@@ -70,8 +125,8 @@ def new_item(request):
     if request.method == 'GET':
         form = ItemForm
         context = {
-            'title': 'Dar Pieza de Alta',
-            'action': 'Cargar Pieza',
+            'title': 'Cargar nuevo Item',
+            'action': 'Cargar Item',
             'form': form
         }
         return render(request, 'inventory/form.html', context)
@@ -82,8 +137,8 @@ def new_item(request):
             return redirect('inventory:new_item')
         else:
             context = {
-                'title': 'Dar Pieza de Alta',
-                'action': 'Cargar Pieza',
+                'title': 'Cargar Nuevo Item',
+                'action': 'Cargar Item',
                 'form': form
             }
 
@@ -158,27 +213,3 @@ def withdrawals(request):
         'items': all_withdrawals
     }
     return render(request, 'inventory/history.html', context)
-
-
-@login_required
-def statistics(request):
-    total = 0
-    parts = Item.objects.all()
-
-    context = {
-        'total_cost': 0,
-        str(Item.GASOLINA): 0,
-        str(Item.PRODUCTO_TERMINADO_BODEGA_UNO): 0,
-        str(Item.PRODUCTO_TERMINADO_BODEGA_DOS): 0,
-        str(Item.ACCESORIOS): 0,
-        str(Item.REFACCIONES): 0
-    }
-
-    for part in parts:
-        total = part.cost * part.quantity
-        context['total_cost'] += total
-        context[part.area] += total
-
-    context = {key: '{:,}'.format(value) for key, value in context.items()}
-
-    return render(request, 'inventory/statistics.html', context)
