@@ -7,10 +7,15 @@ class SKU(models.Model):
     name = models.CharField(max_length=155,
                             verbose_name='Nombre')
     brand = models.CharField(max_length=155,
-                             verbose_name='Marca')
+                             verbose_name='Marca',
+                             blank=True)
+    modelo = models.CharField(max_length=155,
+                              verbose_name='Modelo',
+                              blank=True)
     description = models.TextField(verbose_name='Descripción')
     part_number = models.CharField(max_length=155,
-                                   verbose_name='Número de Parte')
+                                   verbose_name='Número de Parte',
+                                   blank=True)
     height = models.IntegerField(verbose_name='Alto')
     width = models.IntegerField(verbose_name='Ancho')
     length = models.IntegerField(verbose_name='Largo')
