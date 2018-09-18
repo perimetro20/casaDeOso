@@ -14,6 +14,7 @@ class SKUForm(forms.ModelForm):
             'sku',
             'name',
             'brand',
+            'model',
             'description',
             'part_number',
             'height',

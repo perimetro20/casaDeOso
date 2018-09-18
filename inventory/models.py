@@ -9,7 +9,7 @@ class SKU(models.Model):
     brand = models.CharField(max_length=155,
                              verbose_name='Marca',
                              blank=True)
-    modelo = models.CharField(max_length=155,
+    model = models.CharField(max_length=155,
                               verbose_name='Modelo',
                               blank=True)
     description = models.TextField(verbose_name='Descripción')
