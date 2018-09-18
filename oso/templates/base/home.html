@@ -14,8 +14,8 @@
     <h2>Consulta lo que necesites<h2>
 </div>
 <div class='row text-center'>
+    <a href="{% url 'inventory:new_sku' %}" class="btn btn-lg btn-warning">Cargar Nuevo SKU</a>
 	<a href="{% url 'inventory:query_inventory' %}" class="btn btn-lg btn-primary">Consultar Inventario</a>
-    <a href="{% url 'inventory:new_sku' %}" class="btn btn-lg btn-warning">Cargar Nueva Pieza</a>
 </div>
 
 {# <div class='row text-center'>#}

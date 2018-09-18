@@ -11,6 +11,9 @@ class SKU(models.Model):
     description = models.TextField(verbose_name='Descripción')
     part_number = models.CharField(max_length=155,
                                    verbose_name='Número de Parte')
+    height = models.IntegerField(verbose_name='Alto')
+    width = models.IntegerField(verbose_name='Ancho')
+    length = models.IntegerField(verbose_name='Largo')
     measuring_unit = models.CharField(max_length=155,
                                       verbose_name='Unidad de Medida')
 
@@ -34,6 +37,11 @@ class Item(models.Model):
 
     def __str__(self):
         return self.piece_number
+
+
+class Picture(models.Model):
+    item = models.ForeignKey('Item', on_delete=models.CASCADE)
+
 
 class Entry(models.Model):
     item = models.ForeignKey('Item', on_delete=models.CASCADE)

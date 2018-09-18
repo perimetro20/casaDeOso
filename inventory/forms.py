@@ -16,6 +16,9 @@ class SKUForm(forms.ModelForm):
             'brand',
             'description',
             'part_number',
+            'height',
+            'width',
+            'length',
             'measuring_unit'
         ]
 
