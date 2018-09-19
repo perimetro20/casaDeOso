@@ -19,9 +19,8 @@
                 <td> <a href="{% url 'inventory:sku' sku.id %}">{{ sku.sku }}</a></td>
                 <td> {{ sku.name }}</td>
             </tr>
-        </table>
-    
         {% endfor %}
+    </table>
 </div>
 {% endblock %}
 
