@@ -14,7 +14,7 @@
             <th>SKU</th>
             <th>Nombre</th>
         </tr>
-        {% for sku in skus %}
+        {% for sku in skus reversed %}
             <tr>
                 <td> <a href="{% url 'inventory:sku' sku.id %}">{{ sku.sku }}</a></td>
                 <td> {{ sku.name }}</td>
