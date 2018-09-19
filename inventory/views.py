@@ -56,8 +56,8 @@ def new_sku(request):
     elif request.method == 'POST':
         form = SKUForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('inventory:new_sku')
+            sku = form.save()
+            return redirect('inventory:sku', sku.id)
         else:
             context = {
                 'title': 'Dar SKU de Alta',
@@ -141,8 +141,8 @@ def new_item(request):
     elif request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('inventory:new_item')
+            item = form.save()
+            return redirect('inventory:sku', item.sku.id)
         else:
             context = {
                 'title': 'Cargar Nuevo Item',
