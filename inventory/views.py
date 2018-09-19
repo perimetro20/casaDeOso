@@ -23,6 +23,14 @@ def query_inventory(request):
         else:
             return HttpResponseBadRequest
 
+@login_required
+def skus(request):
+    skus = SKU.objects.all()
+    context = {
+        'skus': skus
+    }
+
+    return render(request, 'inventory/skus.html', context)
 
 @login_required
 def sku(request, sku_id):

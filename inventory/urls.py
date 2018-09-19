@@ -1,13 +1,14 @@
 from django.urls import path
 from django.conf.urls import url
 from .views import item, query_inventory, new_entry, new_item, new_withdrawal, \
-                   entries, sku, new_sku, edit_sku, withdrawals, edit_item
+                   entries, sku, new_sku, edit_sku, withdrawals, edit_item, skus
 
 
 app_name = 'inventory'
 
 urlpatterns = [
     url(r'^query_inventory/', query_inventory, name='query_inventory'),
+    path('skus/', skus, name='skus'),
     path('sku/<int:sku_id>/', sku, name='sku'),
     path('sku/new', new_sku, name='new_sku'),
     path('sku/<int:sku_id>/edit/', edit_sku, name='edit_sku'),
